@@ -1,4 +1,5 @@
 const slider = document.querySelector(".slider");
+const dotsContainer = document.querySelector(".dots-container")
 
 async function fetchListOfImage() {
   try {
@@ -19,14 +20,21 @@ async function fetchListOfImage() {
   }
 }
 
-function displayImages(imageList) {
-  slider.innerHTML = imageList.map(
+function displayImages(getImageList) {
+  slider.innerHTML = getImageList.map(
     (item) => `
     <div class="slide">
       <img src="${item.download_url}" alt="Image by ${item.author}" class="slider-image" />
     </div>
     `
   ).join(" "); // Fixed: Added .join("") to properly join the elements into a single string
+
+ dotsContainer.innerHTML = getImageList.map(
+    (item, index) => `
+    <span class="dot ${index === 0 ? "active" : ""}" data-slide=${index}></span>
+    `
+  ).join(" ");
+
 }
 
 fetchListOfImage();
