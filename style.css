@@ -12,7 +12,7 @@ html {
 
 body {
   font-family: "Poppins", sans-serif;
-  background: #FFFFFF;
+  background: #ffffff;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -20,33 +20,43 @@ body {
   align-items: center;
 }
 
-.container{
-    background: #581b98;
-    width: clamp(10rem, 90%, 60rem);
-    padding: 1rem 2rem;
-    border-radius: 0.4rem;
-    box-shadow: 
-  0 0.5rem 1rem rgba(88, 27, 152, 0.4), /* Outer subtle shadow */
-  0 0.3rem 0.6rem rgba(88, 27, 152, 0.6), /* Middle vibrant shadow */
-  inset 0 0.2rem 0.4rem rgba(255, 255, 255, 0.2); /* Soft inner glow effect */
+.container {
+  background: #581b98;
+  width: clamp(10rem, 90%, 60rem);
+  padding: 1rem 2rem;
+  border-radius: 0.4rem;
+  box-shadow: 0 0.5rem 1rem rgba(88, 27, 152, 0.4),
+    /* Outer subtle shadow */ 0 0.3rem 0.6rem rgba(88, 27, 152, 0.6),
+    /* Middle vibrant shadow */ inset 0 0.2rem 0.4rem rgba(255, 255, 255, 0.2); /* Soft inner glow effect */
 }
 
-.container h1{
-    color: #FFFFFF;
-    font-size: 2rem;
-    font-weight: 600;
-    padding: 1rem 2rem;
-    text-align: center;
+.container h1 {
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  text-align: center;
 }
 
 .slider {
-
+max-width: 50rem;
+height: auto;
+display: flex;
+gap: 2rem;
+position: relative;
+margin: 0 auto;
+overflow: hidden;
 }
 
-.slide{
-
+.slide {
+flex: 1 0 auto;
+width: 100%;
+height: auto;
 }
 
-.slide img{
-    
+.slide img {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.2rem;
+  object-fit: contain;
 }

@@ -26,7 +26,7 @@ function displayImages(imageList) {
       <img src="${item.download_url}" alt="Image by ${item.author}" class="slider-image" />
     </div>
     `
-  ).join(""); // Fixed: Added .join("") to properly join the elements into a single string
+  ).join(" "); // Fixed: Added .join("") to properly join the elements into a single string
 }
 
 fetchListOfImage();
