@@ -1,85 +1,80 @@
 const slider = document.querySelector(".slider");
+const dotsContainer = document.querySelector(".dots-container");
+let currentSlide = 0;
 
-
-async function fetchListOfImages() {
+// Fetch images from API
+async function fetchImages() {
   try {
-    const response = await fetch(
-      "https://picsum.photos/v2/list?page=1&limit=10",
-      {
-        method: "GET",
-      }
-    );
-
-    const imagesList = await response.json();
-    console.log(imagesList)
-    if (imagesList && imagesList.length > 0) displayImages(imagesList);
+    const response = await fetch("https://picsum.photos/v2/list?page=1&limit=10");
+    const images = await response.json();
+    if (images?.length) renderImages(images);
   } catch (error) {
-    console.log(error);
+    console.log("Error fetching images:", error);
   }
 }
 
-function displayImages(getImagesList) {
-  slider.innerHTML = getImagesList
-    .map(
-      (item) => `
-    <div class="slide">
-     <img src= ${item.download_url} alt=${item.id} />
+// Render the image slider
+function renderImages(images) {
+  // Render slides
+  slider.innerHTML = images.map((image, index) => imagesTemplate(image, index)).join("");
+  
+  // Render dots separately
+  dotsContainer.innerHTML = images.map((_, index) => dotTemplate(index)).join("");
+  
+  initializeSlider();
+}
+
+// Template for individual image slide
+function imagesTemplate({ id, download_url }, index) {
+  return `
+    <div class="slide" style="transform: translateX(${100 * index}%);">
+      <img src="${download_url}" alt="${id}" />
     </div>
-    `
-    )
-    .join(" ");
+  `;
 }
 
-fetchListOfImages();
+// Template for dots
+function dotTemplate(index) {
+  return `<span class="dot ${index === 0 ? "active" : ""}" data-slide="${index}"></span>`;
+}
 
-// slider functionality begins
-
-setTimeout(() => {
+// Initialize slider functionality
+function initializeSlider() {
   const slides = document.querySelectorAll(".slide");
-  const prevBtn = document.querySelector(".prev");
-  const nextBtn = document.querySelector(".next");
-  let currentSlide = 0;
+  const dots = document.querySelectorAll(".dot");
+  const prev = document.querySelector(".prev");
+  const next = document.querySelector(".next");
 
+  function updateSliderPosition() {
+    slides.forEach((slide, index) => {
+      slide.style.transform = `translateX(${100 * (index - currentSlide)}%)`;
+    });
 
-
-  function changeCurrentSlide(currentSlide) {
-    slides.forEach(
-      (slideItem, index) =>
-        (slideItem.style.transform = `translateX(${
-          100 * (index - currentSlide)
-        }%)`)
-    );
+    // Update active dot
+    dots.forEach(dot => dot.classList.remove("active"));
+    dots[currentSlide].classList.add("active");
   }
 
-  changeCurrentSlide(currentSlide)
-
-  nextBtn.addEventListener("click", () => {
-    currentSlide++;
-
-    if (slides.length - 1 < currentSlide) {
-      currentSlide = 0;
-    }
-
-    changeCurrentSlide(currentSlide);
-    
+  prev?.addEventListener("click", () => {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    updateSliderPosition();
   });
 
-  prevBtn.addEventListener("click", () => {
-    currentSlide--;
-
-    if (0 > currentSlide) {
-      currentSlide = slides.length - 1;
-    }
-
-    changeCurrentSlide(currentSlide);
-    
+  next?.addEventListener("click", () => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    updateSliderPosition();
   });
 
-  dotsContainer.addEventListener("click", (event) => {
-    if(event.target.classList.contains('dot')){
-        const currentSlide = event.target.dataset.slide
-        changeCurrentSlide(currentSlide)
-        
-    }
+  // Dot click event
+  dots.forEach(dot => {
+    dot.addEventListener("click", (event) => {
+      currentSlide = parseInt(event.target.dataset.slide);
+      updateSliderPosition();
+    });
   });
-}, 1000);
+
+  updateSliderPosition();
+}
+
+// Fetch images and initialize
+fetchImages();

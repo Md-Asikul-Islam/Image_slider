@@ -20,7 +20,7 @@ body {
   align-items: center;
 }
 
-.container{
+.container {
   background: #581b98;
   width: clamp(10rem, 90%, 60rem);
   padding: 1rem 2rem;
@@ -39,11 +39,10 @@ h1 {
 .slider {
   display: flex;
   position: relative;
- max-width: 50rem;
- height: 25rem;
- margin: 0 auto;
- overflow: hidden;
- 
+  max-width: 50rem;
+  height: 25rem;
+  margin: 0 auto;
+  overflow: hidden;
 }
 
 .slide {
@@ -52,47 +51,72 @@ h1 {
   width: 100%;
   height: 100%;
   flex-shrink: 0;
-
 }
 
 .slide img {
   width: 100%;
   height: 100%;
-  object-fit:cover;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 0.3s ease-in-out;
 }
 
-/* Container for the control buttons */
-.controls {
-  display: flex; 
-  justify-content: space-evenly; 
-  align-items: center; 
-  width: 100%; 
-  padding: 2rem 1rem;
-  margin: 0 auto; 
+.slide img:hover {
+  transform: scale(1.2);
 }
 
-/* Base styles for the control buttons */
-.control-btn {
-  background-color: #007bff; 
-  color: white; 
-  border: none; 
-  border-radius: 50%; 
-  width: 4rem; 
-  height: 4rem; 
-  font-size: 1.8rem; 
-  cursor: pointer; 
-  display: flex; 
+/* Dots Indicator */
+.dots-container {
+  display: flex;
+  gap: 1rem;
   justify-content: center;
   align-items: center;
-  transition: background-color 0.3s ease; 
+  padding: 2rem 1rem;
 }
 
+.dots-container .dot {
+  width: 4rem;
+  height: 1.5rem;
+  border-radius: 0.8rem;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.dots-container .dot.active {
+  background-color: #000;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  padding: 2rem 1rem;
+  margin: 0 auto;
+}
+
+.control-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  font-size: 1.8rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
 
 .control-btn:hover {
-  background-color: #0056b3; 
+  transform: scale(1.1);
+  background-color: #0056b3;
 }
 
 .control-btn:disabled {
-  background-color: #cccccc; 
-  cursor: not-allowed; 
+  background-color: #cccccc;
+  cursor: not-allowed;
 }
