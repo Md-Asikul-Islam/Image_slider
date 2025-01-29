@@ -39,13 +39,12 @@ body {
 }
 
 .slider {
-max-width: 50rem;
-height: auto;
-display: flex;
-gap: 2rem;
-position: relative;
-margin: 0 auto;
-overflow: hidden;
+  display: flex;
+  position: relative;
+ max-width: 50rem;
+ height: 25rem;
+ margin: 0 auto;
+ overflow: hidden;
 }
 
 .slide {
