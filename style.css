@@ -20,7 +20,7 @@ body {
   align-items: center;
 }
 
-.container {
+.container{
   background: #581b98;
   width: clamp(10rem, 90%, 60rem);
   padding: 1rem 2rem;
