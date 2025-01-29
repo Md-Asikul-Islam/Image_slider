@@ -73,36 +73,26 @@ body {
   }
   
   .controls button {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 1.5rem;
-    border-radius: 50%;
-    transition: background-color 0.3s;
+    background-color: #007bff; 
+  color: white; 
+  border: none; 
+  border-radius: 50%; 
+  width: 4rem; 
+  height: 4rem; 
+  font-size: 1.8rem; 
+  cursor: pointer; 
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease; 
   }
   
-  .controls button:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-
-  .dots-container {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem 0rem;
+ 
+.control-btn:hover {
+  background-color: #0056b3; 
 }
 
-.dots-container .dot{
-    width: 40px;
-    height: 15px;
-    border-radius: 8px;
-    background-color: #ffffff;
-    cursor: pointer;
-}
-
-.dots-container .dot.active {
-    background-color: #000;
+.control-btn:disabled {
+  background-color: #cccccc; 
+  cursor: not-allowed; 
 }
